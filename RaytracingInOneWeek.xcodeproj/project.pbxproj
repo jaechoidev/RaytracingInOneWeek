@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		764BA5E32B78473B00BD9646 /* RaytracingInOneWeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5E22B78473B00BD9646 /* RaytracingInOneWeekApp.swift */; };
-		764BA5E52B78473B00BD9646 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5E42B78473B00BD9646 /* ContentView.swift */; };
+		764BA5E52B78473B00BD9646 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5E42B78473B00BD9646 /* RootView.swift */; };
 		764BA5E72B78473B00BD9646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764BA5E62B78473B00BD9646 /* Assets.xcassets */; };
 		764BA5EA2B78473B00BD9646 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764BA5E92B78473B00BD9646 /* Preview Assets.xcassets */; };
+		764BA5F22B79DB3300BD9646 /* vec3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5F12B79DB3300BD9646 /* vec3.swift */; };
+		764BA5F42B79DB6400BD9646 /* Raytracer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5F32B79DB6400BD9646 /* Raytracer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		764BA5DF2B78473B00BD9646 /* RaytracingInOneWeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaytracingInOneWeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		764BA5E22B78473B00BD9646 /* RaytracingInOneWeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaytracingInOneWeekApp.swift; sourceTree = "<group>"; };
-		764BA5E42B78473B00BD9646 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		764BA5E42B78473B00BD9646 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		764BA5E62B78473B00BD9646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		764BA5E92B78473B00BD9646 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		764BA5EB2B78473B00BD9646 /* RaytracingInOneWeek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaytracingInOneWeek.entitlements; sourceTree = "<group>"; };
+		764BA5F12B79DB3300BD9646 /* vec3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vec3.swift; sourceTree = "<group>"; };
+		764BA5F32B79DB6400BD9646 /* Raytracer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raytracer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				764BA5E22B78473B00BD9646 /* RaytracingInOneWeekApp.swift */,
-				764BA5E42B78473B00BD9646 /* ContentView.swift */,
+				764BA5E42B78473B00BD9646 /* RootView.swift */,
+				764BA5F32B79DB6400BD9646 /* Raytracer.swift */,
+				764BA5F12B79DB3300BD9646 /* vec3.swift */,
 				764BA5E62B78473B00BD9646 /* Assets.xcassets */,
 				764BA5EB2B78473B00BD9646 /* RaytracingInOneWeek.entitlements */,
 				764BA5E82B78473B00BD9646 /* Preview Content */,
@@ -139,8 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				764BA5E52B78473B00BD9646 /* ContentView.swift in Sources */,
+				764BA5E52B78473B00BD9646 /* RootView.swift in Sources */,
+				764BA5F22B79DB3300BD9646 /* vec3.swift in Sources */,
 				764BA5E32B78473B00BD9646 /* RaytracingInOneWeekApp.swift in Sources */,
+				764BA5F42B79DB6400BD9646 /* Raytracer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
