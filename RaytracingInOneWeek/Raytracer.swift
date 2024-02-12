@@ -14,8 +14,8 @@ class Raytracer: ObservableObject {
     var scanlinePixels: [UInt8] = []
     var initPixels: [UInt8] = Array(repeating: 0, count: 1000)
     var pixelColor : Color3 = Color3(e1: 0, e2: 0, e3: 0)
-    var width: Int
-    var height: Int
+    @Published var width: Int
+    @Published var height: Int
     
     init(width: Int, height: Int){
         self.width = width
@@ -29,11 +29,35 @@ class Raytracer: ObservableObject {
         self.objectWillChange.send()
     }
     
+    func refreshImage() {
+        self.pixelArray = Array(repeating: 0, count: self.width*self.height*4)
+        self.initPixels = self.pixelArray
+    }
+    
     func render() async {
         await MainActor.run{
             self.pixelArray = self.initPixels
         }
         
+        // Camera
+        let focalLength : Double = 1.0
+        let viewportHeight : Double = 2.0
+        let viewportWidth = viewportHeight * Double(Double(width) / Double(height))
+        let cameraCenter: Point3 = Point3(e1: 0, e2: 0, e3: 0)
+        
+        // calculate the vectors across the horizontal and down the vertical viewport edges.
+        let viewportU : Vec3 = Vec3(e1: viewportWidth, e2: 0, e3: 0)
+        let viewportV : Vec3 = Vec3(e1: 0, e2: viewportHeight, e3: 0)
+
+        // calculate the horizontal and vertical delta vectors from pixel to pixel
+        let pixelDeltaU = viewportU / Double(self.width)
+        let pixelDeltaV = viewportV / Double(self.height)
+        
+        // calculate the location of the upper left pixel
+        let viewportUpperLeft = cameraCenter - Vec3(e1:0, e2:0, e3:focalLength) - viewportU / 2.0 - viewportV / 2.0
+        let pixel00Loc = viewportUpperLeft + 0.5 * (pixelDeltaU + pixelDeltaV)
+
+        // Render
         for j in 0..<height{
             await MainActor.run{
                 self.progress = "Scanlines remaining : \(height - j)"
@@ -41,9 +65,10 @@ class Raytracer: ObservableObject {
 
             self.scanlinePixels = []
             for i in 0..<width{
-                pixelColor = Color3(e1: Double(Double(i) / Double(width - 1)), 
-                                    e2: Double(Double(j) / Double(height - 1)),
-                                    e3: 0)
+                let pixelCenter = pixel00Loc + (Double(i) * pixelDeltaU) + (Double(j) * pixelDeltaV)
+                let rayDir = pixelCenter - cameraCenter
+                let r = Ray(origin: cameraCenter, direction: rayDir)
+                pixelColor = rayColor(r)
                 self.scanlinePixels.append(contentsOf: self.updateScanlinePixels(pixelColor: pixelColor))
             }
 
@@ -51,12 +76,17 @@ class Raytracer: ObservableObject {
             await MainActor.run{
                 self.pixelArray.replaceSubrange((self.width*j*4..<(self.width*j)*4+self.width), with: self.scanlinePixels)
             }
-
         }
         
         await MainActor.run{
             self.progress = "Done."
         }
+    }
+    
+    func rayColor(_ ray : Ray) -> Color3 {
+        let unitDir = Vec3.unit(v1: ray.direction())
+        let a = 0.5 * (unitDir.y + 1.0)
+        return (1.0 - a) * Color3(e1:1.0, e2:1.0, e3:1.0) + a * Color3(e1:0.5, e2:0.7, e3:1.0)
     }
     
     func updateScanlinePixels(pixelColor: Color3, alpha: Double = 1) -> [UInt8]{

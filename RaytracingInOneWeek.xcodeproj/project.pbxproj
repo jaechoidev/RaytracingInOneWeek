@@ -13,6 +13,7 @@
 		764BA5EA2B78473B00BD9646 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 764BA5E92B78473B00BD9646 /* Preview Assets.xcassets */; };
 		764BA5F22B79DB3300BD9646 /* Vec3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5F12B79DB3300BD9646 /* Vec3.swift */; };
 		764BA5F42B79DB6400BD9646 /* Raytracer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5F32B79DB6400BD9646 /* Raytracer.swift */; };
+		764BA5F72B79E5D800BD9646 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764BA5F62B79E5D800BD9646 /* Ray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		764BA5EB2B78473B00BD9646 /* RaytracingInOneWeek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaytracingInOneWeek.entitlements; sourceTree = "<group>"; };
 		764BA5F12B79DB3300BD9646 /* Vec3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vec3.swift; sourceTree = "<group>"; };
 		764BA5F32B79DB6400BD9646 /* Raytracer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raytracer.swift; sourceTree = "<group>"; };
+		764BA5F62B79E5D800BD9646 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +61,7 @@
 				764BA5E22B78473B00BD9646 /* RaytracingInOneWeekApp.swift */,
 				764BA5E42B78473B00BD9646 /* RootView.swift */,
 				764BA5F32B79DB6400BD9646 /* Raytracer.swift */,
-				764BA5F12B79DB3300BD9646 /* Vec3.swift */,
+				764BA5F52B79E5C100BD9646 /* Utilities */,
 				764BA5E62B78473B00BD9646 /* Assets.xcassets */,
 				764BA5EB2B78473B00BD9646 /* RaytracingInOneWeek.entitlements */,
 				764BA5E82B78473B00BD9646 /* Preview Content */,
@@ -73,6 +75,15 @@
 				764BA5E92B78473B00BD9646 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		764BA5F52B79E5C100BD9646 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				764BA5F12B79DB3300BD9646 /* Vec3.swift */,
+				764BA5F62B79E5D800BD9646 /* Ray.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +160,7 @@
 				764BA5F22B79DB3300BD9646 /* Vec3.swift in Sources */,
 				764BA5E32B78473B00BD9646 /* RaytracingInOneWeekApp.swift in Sources */,
 				764BA5F42B79DB6400BD9646 /* Raytracer.swift in Sources */,
+				764BA5F72B79E5D800BD9646 /* Ray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

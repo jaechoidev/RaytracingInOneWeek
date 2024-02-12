@@ -9,11 +9,21 @@ import SwiftUI
 import AppKit
 
 struct ContentView: View {
-    
-    @StateObject var raytracer = Raytracer(width: 500, height: 500)
+    @State var width = "100"
+    @State var height = "100"
+    @StateObject var raytracer = Raytracer(width: 100, height: 100)
     
     var body: some View {
         VStack{
+            HStack{
+                Text("Width")
+                TextField(text: $width){}
+            }
+            HStack{
+                Text("Height")
+                TextField(text: $height){}
+            }
+            Spacer()
             PixelsToImage(raytracer: raytracer)
             Button(action: {
                 Task{
@@ -26,6 +36,11 @@ struct ContentView: View {
             Text(raytracer.progress)
         }
         .frame(width: 550, height: 500, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        .onChange(of: [width, height]) {
+            raytracer.width = Int(width) ?? 100
+            raytracer.height = Int(height) ?? 100
+            raytracer.refreshImage()
+        }
     }
 }
 
@@ -36,7 +51,7 @@ struct PixelsToImage: View {
         if let nsImage = createImage() {
             Image(nsImage: nsImage)
                 .resizable()
-                .frame(width:500, height:500)
+                .frame(width: CGFloat(raytracer.width), height: CGFloat(raytracer.height))
         } else {
             Text("Failed to create image")
         }
