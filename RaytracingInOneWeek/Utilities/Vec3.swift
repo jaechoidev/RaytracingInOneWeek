@@ -40,59 +40,59 @@ class Vec3 : CustomStringConvertible{
         return Vec3(e1: -Double(v1.x), e2: -Double(v1.y), e3: -Double(v1.z))
     }
     
-    static func += (lhs: Vec3, rhs: Vec3) {
+    static func += (_ lhs: Vec3, _ rhs: Vec3) {
         lhs.e[0] += rhs.x
         lhs.e[1] += rhs.y
         lhs.e[2] += rhs.z
     }
     
-    static func -= (lhs: Vec3, rhs: Vec3) {
+    static func -= (_ lhs: Vec3, _ rhs: Vec3) {
         lhs.e[0] -= rhs.x
         lhs.e[1] -= rhs.y
         lhs.e[2] -= rhs.z
     }
     
-    static func *= (lhs: Vec3, rhs: Double) {
+    static func *= (_ lhs: Vec3, _ rhs: Double) {
         lhs.e[0] *= rhs
         lhs.e[1] *= rhs
         lhs.e[2] *= rhs
     }
     
-    static func /= (lhs: Vec3, rhs: Double) {
+    static func /= (_ lhs: Vec3, _ rhs: Double) {
         lhs.e[0] *= 1/rhs
         lhs.e[1] *= 1/rhs
         lhs.e[2] *= 1/rhs
     }
 
-    static func + (lhs: Vec3, rhs: Vec3) -> Vec3{
+    static func + (_ lhs: Vec3, _ rhs: Vec3) -> Vec3{
         return Vec3(e1: lhs.x + rhs.x, e2:lhs.y + rhs.y, e3:lhs.z + rhs.z)
     }
     
-    static func - (lhs: Vec3, rhs: Vec3) -> Vec3{
+    static func - (_ lhs: Vec3, _ rhs: Vec3) -> Vec3{
         return Vec3(e1: lhs.x - rhs.x, e2:lhs.y - rhs.y, e3:lhs.z - rhs.z)
     }
 
-    static func * (lhs: Vec3, rhs: Vec3) -> Vec3{
+    static func * (_ lhs: Vec3, _ rhs: Vec3) -> Vec3{
         return Vec3(e1: lhs.x * rhs.x, e2:lhs.y * rhs.y, e3:lhs.z * rhs.z)
     }
 
-    static func * (lhs: Double, rhs: Vec3) -> Vec3{
+    static func * (_ lhs: Double, _ rhs: Vec3) -> Vec3{
         return Vec3(e1: lhs * rhs.x, e2:lhs * rhs.y, e3:lhs * rhs.z)
     }
 
-    static func * (lhs: Vec3 , rhs: Double) -> Vec3{
+    static func * (_ lhs: Vec3 , _ rhs: Double) -> Vec3{
         return rhs * lhs
     }
    
-    static func / (lhs: Vec3 , rhs: Double) -> Vec3{
+    static func / (_ lhs: Vec3 , _ rhs: Double) -> Vec3{
         return (1/rhs) * lhs
     }
     
-    static func dot (lhs: Vec3 , rhs: Vec3) -> Double{
+    static func dot (_ lhs: Vec3 , _ rhs: Vec3) -> Double{
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
     }
 
-    static func cross (lhs: Vec3 , rhs: Vec3) -> Vec3{
+    static func cross (_ lhs: Vec3 , _ rhs: Vec3) -> Vec3{
         return Vec3(e1: lhs.y * rhs.z - lhs.z * rhs.y,
                     e2: lhs.z * rhs.x - lhs.x * rhs.z,
                     e3: lhs.x * rhs.y - lhs.y * rhs.x)

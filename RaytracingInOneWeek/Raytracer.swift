@@ -83,7 +83,19 @@ class Raytracer: ObservableObject {
         }
     }
     
+    func hitSphere(center: Point3, radius: Double, ray: Ray) -> Bool {
+        let oc = ray.origin() - center
+        let a = Vec3.dot(ray.direction(), ray.direction())
+        let b = 2.0 * Vec3.dot(oc, ray.direction())
+        let c = Vec3.dot(oc, oc) - radius * radius
+        let discriminant = b*b - 4*a*c
+        return (discriminant >= 0)
+    }
+    
     func rayColor(_ ray : Ray) -> Color3 {
+        if hitSphere(center: Point3(e1: 0, e2: 0, e3: -1), radius: 0.5, ray: ray){
+            return Color3(e1: 0.5, e2: 0.2, e3: 0.3)
+        }
         let unitDir = Vec3.unit(v1: ray.direction())
         let a = 0.5 * (unitDir.y + 1.0)
         return (1.0 - a) * Color3(e1:1.0, e2:1.0, e3:1.0) + a * Color3(e1:0.5, e2:0.7, e3:1.0)
