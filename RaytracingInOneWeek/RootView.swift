@@ -30,7 +30,6 @@ struct ContentView: View {
 }
 
 struct PixelsToImage: View {
-    
     @StateObject var raytracer : Raytracer
     
     var body: some View {

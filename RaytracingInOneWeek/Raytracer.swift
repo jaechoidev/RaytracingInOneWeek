@@ -13,6 +13,7 @@ class Raytracer: ObservableObject {
     @Published var pixelArray: [UInt8] = []
     var scanlinePixels: [UInt8] = []
     var initPixels: [UInt8] = Array(repeating: 0, count: 1000)
+    var pixelColor : Color3 = Color3(e1: 0, e2: 0, e3: 0)
     var width: Int
     var height: Int
     
@@ -28,27 +29,41 @@ class Raytracer: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func render () async {
-        self.pixelArray = self.initPixels
-        var r : UInt8 = 0;
-        var g : UInt8 = 0;
-        var b : UInt8 = 0;
-        var a : UInt8 = 0;
+    func render() async {
+        await MainActor.run{
+            self.pixelArray = self.initPixels
+        }
+        
         for j in 0..<height{
-            self.progress = "Scanlines remaining : \(height - j)"
+            await MainActor.run{
+                self.progress = "Scanlines remaining : \(height - j)"
+            }
+
             self.scanlinePixels = []
             for i in 0..<width{
-                r = UInt8(clamping: Int(floor(Double(Double(i) / Double(width - 1)) * 255.999)))
-                g = UInt8(clamping: Int(floor(Double(Double(j) / Double(height - 1)) * 255.999)))
-                b = UInt8(clamping: (0 * 255))
-                a = UInt8(clamping: (1 * 255))
-                self.scanlinePixels.append(contentsOf: [r,g,b,a])
+                pixelColor = Color3(e1: Double(Double(i) / Double(width - 1)), 
+                                    e2: Double(Double(j) / Double(height - 1)),
+                                    e3: 0)
+                self.scanlinePixels.append(contentsOf: self.updateScanlinePixels(pixelColor: pixelColor))
             }
-            self.pixelArray.replaceSubrange((self.width*j*4..<(self.width*(j+1))*4),
-                                            with: self.scanlinePixels)
-            self.scanlinePixels = []
+
+            // update screen
+            await MainActor.run{
+                self.pixelArray.replaceSubrange((self.width*j*4..<(self.width*j)*4+self.width), with: self.scanlinePixels)
+            }
+
         }
-        self.progress = "Done."
+        
+        await MainActor.run{
+            self.progress = "Done."
+        }
     }
     
+    func updateScanlinePixels(pixelColor: Color3, alpha: Double = 1) -> [UInt8]{
+        let r : UInt8 = UInt8(clamping: Int( floor( pixelColor.x * 255.999 )))
+        let g : UInt8 = UInt8(clamping: Int( floor( pixelColor.y * 255.999 )))
+        let b : UInt8 = UInt8(clamping: Int( pixelColor.z  * 255.999 ))
+        let a : UInt8 = UInt8(clamping: Int( alpha * 255.999 ))
+        return [r,g,b,a]
+    }
 }

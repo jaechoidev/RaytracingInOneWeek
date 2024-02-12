@@ -112,3 +112,4 @@ class Vec3 : CustomStringConvertible{
 }
 
 typealias Point3 = Vec3
+typealias Color3 = Vec3
